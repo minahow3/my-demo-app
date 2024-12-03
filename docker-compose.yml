@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: minahow3/my-demo-app_frontend:latest
+    container_name: frontend
+    ports:
+      - "3000:3000" # フロントエンドをローカルポート3000にマッピング
+    depends_on:
+      - backend # backendが先に起動している必要がある
+
+  backend:
+    image: minahow3/my-demo-app_backend:latest
+    container_name: backend
+    ports:
+      - "5000:5000" # バックエンドをローカルポート5000にマッピング
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+      POSTGRES_HOST: db
+    depends_on:
+      - db # データベースが起動している必要がある
+
+  db:
+    image: postgres:15
+    container_name: db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432" # PostgreSQLをローカルポート5432にマッピング
+
+volumes:
+  postgres-data:
