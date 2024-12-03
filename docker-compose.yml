@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   frontend:
-    image: minahow3/my-demo-app_frontend:latest
+    image: minahow3/my-demo-app_frontend:20241203
     container_name: frontend
     ports:
       - "3000:3000" # フロントエンドをローカルポート3000にマッピング
@@ -10,7 +10,7 @@ services:
       - backend # backendが先に起動している必要がある
 
   backend:
-    image: minahow3/my-demo-app_backend:latest
+    image: minahow3/my-demo-app_backend:20241203
     container_name: backend
     ports:
       - "5000:5000" # バックエンドをローカルポート5000にマッピング
